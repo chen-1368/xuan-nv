@@ -393,7 +393,19 @@ body {
 }
 
 /* ========================================
-   11. 技能卡片样式
+   11. 通用内容卡片样式
+   ======================================== */
+
+.content-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+/* ========================================
+   12. 技能卡片样式
    ======================================== */
 
 .skill-card {
