@@ -445,10 +445,11 @@ body {
     margin: var(--space-md) 0;
 }
 
-.lazy-image img {
+img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+    display: block;
 }
 
 /* ========================================
