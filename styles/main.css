@@ -1,0 +1,591 @@
+/**
+ * 造梦无双玄女角色解析 - 主样式文件
+ * 包含主题系统、响应式布局、表格样式等
+ */
+
+/* ========================================
+   1. CSS 变量定义 - 主题系统
+   ======================================== */
+
+/* 白天主题（默认） */
+:root {
+    /* 颜色变量 */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f7;
+    --bg-tertiary: #e8e8ed;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --accent: #0066cc;
+    --accent-hover: #0055aa;
+    --border: #d2d2d7;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --table-stripe: #f9f9fb;
+    --code-bg: #f5f5f7;
+    
+    /* 布局变量 */
+    --content-max-width: 800px;
+    --toc-width: 280px;
+    --header-height: 60px;
+    
+    /* 间距变量 */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 48px;
+    
+    /* 字体变量 */
+    --font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "SF Mono", "Consolas", "Liberation Mono", monospace;
+    --font-size-base: 16px;
+    --line-height: 1.7;
+}
+
+/* 夜间主题 */
+[data-theme="dark"] {
+    --bg-primary: #1c1c1e;
+    --bg-secondary: #2c2c2e;
+    --bg-tertiary: #3a3a3c;
+    --text-primary: #f5f5f7;
+    --text-secondary: #98989d;
+    --accent: #0a84ff;
+    --accent-hover: #409cff;
+    --border: #38383a;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --table-stripe: #252527;
+    --code-bg: #2c2c2e;
+}
+
+/* 跟随系统主题 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-primary: #1c1c1e;
+        --bg-secondary: #2c2c2e;
+        --bg-tertiary: #3a3a3c;
+        --text-primary: #f5f5f7;
+        --text-secondary: #98989d;
+        --accent: #0a84ff;
+        --accent-hover: #409cff;
+        --border: #38383a;
+        --shadow: rgba(0, 0, 0, 0.3);
+        --table-stripe: #252527;
+        --code-bg: #2c2c2e;
+    }
+}
+
+/* ========================================
+   2. 基础重置与全局样式
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: var(--font-size-base);
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: var(--line-height);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+/* ========================================
+   3. 头部导航栏
+   ======================================== */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-lg);
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-tertiary);
+}
+
+.theme-toggle__icon {
+    font-size: 1rem;
+}
+
+/* 移动端菜单按钮 */
+.menu-toggle {
+    display: none;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-sm);
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   4. 主布局
+   ======================================== */
+
+.main-container {
+    display: flex;
+    padding-top: var(--header-height);
+    min-height: 100vh;
+}
+
+/* 内容区域 */
+.content {
+    flex: 1;
+    max-width: calc(100% - var(--toc-width));
+    padding: var(--space-xl) var(--space-lg);
+    margin-right: var(--toc-width);
+}
+
+.content__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+/* ========================================
+   5. 目录导航
+   ======================================== */
+
+.toc {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: var(--toc-width);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border);
+    padding: var(--space-lg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.toc__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.toc__list {
+    list-style: none;
+}
+
+.toc__item {
+    margin-bottom: var(--space-xs);
+}
+
+.toc__link {
+    display: block;
+    padding: var(--space-sm) var(--space-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.toc__link:hover {
+    color: var(--accent);
+    background: var(--bg-tertiary);
+}
+
+.toc__link--active {
+    color: var(--accent);
+    background: var(--bg-tertiary);
+    font-weight: 500;
+}
+
+/* 二级目录项 */
+.toc__sub-list {
+    list-style: none;
+    padding-left: var(--space-md);
+}
+
+.toc__sub-item .toc__link {
+    font-size: 0.8125rem;
+}
+
+/* ========================================
+   6. 章节样式
+   ======================================== */
+
+.section {
+    margin-bottom: var(--space-xl);
+    scroll-margin-top: calc(var(--header-height) + var(--space-lg));
+}
+
+.section__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--accent);
+}
+
+.section__subtitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: var(--space-lg) 0 var(--space-md);
+}
+
+.section__paragraph {
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    text-align: justify;
+}
+
+.section__note {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+    border-radius: 0 4px 4px 0;
+}
+
+/* ========================================
+   7. 表格样式
+   ======================================== */
+
+.table-container {
+    overflow-x: auto;
+    margin: var(--space-md) 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    background: var(--bg-primary);
+}
+
+.table th,
+.table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.table th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.table tr:nth-child(even) {
+    background: var(--table-stripe);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   8. 列表样式
+   ======================================== */
+
+.list {
+    list-style: none;
+    margin: var(--space-md) 0;
+}
+
+.list__item {
+    padding: var(--space-sm) 0;
+    padding-left: var(--space-md);
+    position: relative;
+    color: var(--text-primary);
+}
+
+.list__item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+.list__item--ordered {
+    counter-increment: list-counter;
+}
+
+.list__item--ordered::before {
+    content: counter(list-counter) ".";
+}
+
+/* 有序列表 */
+.list--ordered {
+    counter-reset: list-counter;
+}
+
+/* ========================================
+   9. 链接样式
+   ======================================== */
+
+.link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* ========================================
+   10. 代码样式
+   ======================================== */
+
+.code {
+    font-family: var(--font-mono);
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.875em;
+}
+
+/* ========================================
+   11. 技能卡片样式
+   ======================================== */
+
+.skill-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+.skill-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+}
+
+.skill-card__subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin: var(--space-md) 0 var(--space-sm);
+}
+
+/* ========================================
+   12. 图片懒加载占位符
+   ======================================== */
+
+.lazy-image {
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    margin: var(--space-md) 0;
+}
+
+.lazy-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* ========================================
+   13. 移动端目录菜单
+   ======================================== */
+
+.mobile-toc {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 999;
+}
+
+.mobile-toc--open {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.mobile-toc__inner {
+    padding: var(--space-md);
+}
+
+/* ========================================
+   14. 页脚
+   ======================================== */
+
+.footer {
+    text-align: center;
+    padding: var(--space-xl) var(--space-lg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    border-top: 1px solid var(--border);
+    margin-right: var(--toc-width);
+}
+
+.footer__link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ========================================
+   15. 响应式设计 - 平板
+   ======================================== */
+
+@media (max-width: 1024px) {
+    :root {
+        --toc-width: 240px;
+    }
+    
+    .content {
+        max-width: calc(100% - var(--toc-width));
+    }
+}
+
+/* ========================================
+   16. 响应式设计 - 移动端
+   ======================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 15px;
+        --header-height: 56px;
+    }
+    
+    .header {
+        padding: 0 var(--space-md);
+    }
+    
+    .header__title {
+        font-size: 1rem;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .content {
+        max-width: 100%;
+        margin-right: 0;
+        padding: var(--space-lg) var(--space-md);
+        order: 2;
+    }
+    
+    .toc {
+        display: none;
+    }
+    
+    .mobile-toc {
+        display: block;
+        order: 1;
+    }
+    
+    .footer {
+        margin-right: 0;
+    }
+    
+    .section__title {
+        font-size: 1.25rem;
+    }
+    
+    .section__subtitle {
+        font-size: 1rem;
+    }
+    
+    .table {
+        font-size: 0.8125rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .skill-card {
+        padding: var(--space-md);
+    }
+}
+
+/* ========================================
+   17. 响应式设计 - 小屏手机
+   ======================================== */
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-base: 14px;
+        --space-lg: 16px;
+        --space-xl: 32px;
+    }
+    
+    .content {
+        padding: var(--space-md) var(--space-sm);
+    }
+    
+    .section {
+        margin-bottom: var(--space-lg);
+    }
+    
+    .table-container {
+        font-size: 0.75rem;
+    }
+}

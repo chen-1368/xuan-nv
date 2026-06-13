@@ -1,0 +1,10 @@
+# 忽略的文件和目录
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+dist/
+build/
+*.swp
+*.swo
+*~
