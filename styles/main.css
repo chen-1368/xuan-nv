@@ -401,6 +401,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: var(--space-lg);
+    padding-top: 0;
     margin: var(--space-lg) 0;
 }
 
@@ -447,9 +448,7 @@ body {
 
 img {
     max-width: 100%;
-    height: auto;
     border-radius: 8px;
-    display: block;
 }
 
 /* ========================================
