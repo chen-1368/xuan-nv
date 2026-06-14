@@ -278,7 +278,6 @@ body {
 
 .section__paragraph {
     color: var(--text-primary);
-    margin-bottom: var(--space-md);
     text-align: justify;
 }
 
@@ -401,7 +400,6 @@ body {
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: var(--space-lg);
-    padding-top: 0;
     margin: var(--space-lg) 0;
 }
 
@@ -436,14 +434,16 @@ body {
    ======================================== */
 
 .lazy-image {
-    background: var(--bg-tertiary);
-    border-radius: 8px;
     min-height: 200px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
     color: var(--text-secondary);
-    margin: var(--space-md) 0;
+    margin: var(--space-md);
+    gap: var(--space-md);
+    width: fit-content;
+    max-width: 100%;
 }
 
 img {
