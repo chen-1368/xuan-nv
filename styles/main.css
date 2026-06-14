@@ -123,6 +123,18 @@ body {
     border-color 0.3s ease;
 }
 
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.header__logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
 .header__title {
   font-size: 1.25rem;
   font-weight: 600;
