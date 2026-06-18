@@ -179,6 +179,7 @@ body {
   padding: var(--space-sm);
   cursor: pointer;
   color: var(--text-primary);
+  width: 40px;
 }
 
 /* ========================================
@@ -524,6 +525,10 @@ img {
   .menu-toggle {
     display: block;
   }
+  .mobile-toc {
+    display: block;
+    order: 1;
+  }
 }
 /* ========================================
    16. 响应式设计 - 移动端
@@ -552,11 +557,6 @@ img {
     margin-right: 0;
     padding: var(--space-lg) var(--space-md);
     order: 2;
-  }
-
-  .mobile-toc {
-    display: block;
-    order: 1;
   }
 
   .footer {
