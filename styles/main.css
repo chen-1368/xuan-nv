@@ -521,6 +521,9 @@ img {
   .toc {
     display: none;
   }
+  .menu-toggle {
+    display: block;
+  }
 }
 /* ========================================
    16. 响应式设计 - 移动端
@@ -538,10 +541,6 @@ img {
 
   .header__title {
     font-size: 1rem;
-  }
-
-  .menu-toggle {
-    display: block;
   }
 
   .main-container {

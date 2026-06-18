@@ -1,17 +1,15 @@
 {
-  "name": "test1",
+  "name": "xuannv-analysis",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "造梦无双玄女角色解析网站",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
-    "sharp": "^0.35.1",
     "vite": "^8.0.16"
   }
 }
